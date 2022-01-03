@@ -1,0 +1,93 @@
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class="row">
+                <div class="well" >
+                    <label for="roomInput">Choose room</label>
+                    <div name="roomInput" id="roomInput" *ngFor="let room of availableRoom" >
+                        
+                      <button (click)="selectRoom(room)" ><p>{{ room }}</p></button>
+                    </div>
+                </div>
+                <h2>User list</h2>
+                <div class="" *ngFor="let user of userArray" >
+                  <p>{{ user }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <h2>Realtime Chat Application</h2>
+                <hr>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" [(ngModel)]="userName" class="form-control" id="username" placeholder="Enter username" [disabled]="false">
+                        <!-- <small id="userHelp" class="form-text text-muted">Type your username.</small> -->
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="roomInput">Choose room</label>
+                    <select name="roomInput" id="roomInput" class="form-control" [(ngModel)]="room">
+                        <option value="Lobby">Lobby</option>
+                        <option value="Hall">Hall</option>
+                        <option value="Deluxe">Deluxe</option>
+                    </select>
+                </div>
+                <div class="col sm-4">
+                    <div style="margin-top:19px;" class="pull-right"> 
+                        <button type="button" class="btn btn-primary" (click)="join()">Join</button>
+                        <button type="button" class="btn btn-default" (click)="leave()">Leave</button>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="chatbox">
+                <div class="chatbox__user-list">
+                  <h2>Active User list</h2>
+                  <div class="chatbox__user--active" *ngFor="let user of activeUserArray" >
+                    <p>{{ user }}</p>
+                  </div>
+                </div>
+                <div class="messages_list">
+                    <div class="chatbox__messages" *ngFor="let msg of messageArray" [ngClass]="{mine: id == msg.id}">
+                      <div class="user-message">
+                        <div class="message-box">
+                          <p class="name">{{ msg.userName }}</p>
+                          <br/>
+                          <p class="message">{{ msg.message }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- <div class="well" style="height:200px; padding:15px;">
+                    <div *ngFor="let item of messageArray">
+                    <span><strong>{{item.user}} : </strong> {{item.message}}</span>
+                    </div>
+                </div> -->
+            </div>
+            <div class="row">
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" [(ngModel)]="messageText">            
+                </div>
+                <div class="col-sm-2">
+                        <button type="button" class="btn btn-success pull-right" (click)="sendMessage()">Send</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+            <div class="row">
+                <div class="well" >
+                    <div *ngFor="let room of joinedRoom" >
+                        
+                      <button (click)="chooseRoom(room)" ><p>{{ room }}</p></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

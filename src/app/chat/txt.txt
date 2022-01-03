@@ -1,0 +1,62 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ChatService } from './chat.service';
+
+@Component({
+  selector: 'app-chat',
+  templateUrl: './chat.component.html',
+  styleUrls: ['./chat.component.css'],
+  providers:[ChatService]
+})
+export class ChatComponent {
+
+  user = "";
+  room!:String;
+  messageText!:String;
+  messageArray:Array<{user:String,message:String, mine:Boolean, joined: Boolean}> = [];
+  constructor(private _chatService:ChatService, private router: Router){
+      this.user = localStorage.getItem('User') ? JSON.parse(localStorage.getItem('User')|| '{}').userName: "";
+
+      console.log(this.user)
+      if(this.user === ""){
+        let path = '/authen';
+        this.router.navigate([path]);
+      }
+      this._chatService.newUserJoined()
+      .subscribe((data: any)=> this.messageArray.push(data));
+
+
+      this._chatService.userLeftRoom()
+      .subscribe((data: any)=>this.messageArray.push(data));
+
+      this._chatService.newMessageReceived()
+      .subscribe((data: any)=>this.messageArray.push(data));
+  }
+
+  join(){
+      let user = JSON.parse(localStorage.getItem('User')|| '{}');
+      if(!user.room.includes(this.room)){
+        user.room.push(this.room);
+      }
+      console.log(user.room)
+      localStorage.setItem("User", JSON.stringify({ userName: user.userName, room: user.room }));
+      this._chatService.joinRoom({user:this.user, room:this.room});
+  }
+
+  leave(){
+      this._chatService.leaveRoom({user:this.user, room:this.room});
+  }
+
+  sendMessage()
+  {
+      let userx = JSON.parse(localStorage.getItem('User')|| '{}');
+      if(!userx.room.includes(this.room)){
+        window.alert("You are not in this room");
+        return;
+      }
+      this._chatService.sendMessage({user:this.user, room:this.room, message:this.messageText});
+      console.log(this.messageArray)
+  }
+
+
+}

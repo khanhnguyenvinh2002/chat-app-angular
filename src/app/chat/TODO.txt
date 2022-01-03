@@ -1,0 +1,5 @@
+1. implement list of users, check whether a user is online or offline with socket.io 
+(done the implement list of user)
+2. connect to mongodb to store list of users, list of rooms, list of saved messages.
+(stored list of users)
+3. add id to each user (done)

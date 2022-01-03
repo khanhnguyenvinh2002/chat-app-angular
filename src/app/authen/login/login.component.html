@@ -1,0 +1,112 @@
+<div class="bg">
+    <div class="bg_text">
+        <div class="bg_text-deco">
+            <div class="container-fluid" *ngIf="isLogIn == true">
+                <div style="display: flex; justify-content: space-between;margin-top: -66px; text-align: left;">
+                    <h3>Login</h3>
+                    <h3><a (click)="returnHome()" style="cursor: pointer;color: wheat;">Home</a></h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 col-xs-12 offset-md-2" style=" text-align: left;   margin-top: 120px;">
+                        <form [formGroup]="loginForm" (ngSubmit)="login()">
+                            <div class="form-group">
+                                <label for="username">Username</label>
+
+                                <input formControlName="username" type="text" class="form-control form-control-lg" id="username" placeholder="Enter Username" required>
+                                <div *ngIf="loginForm.controls['username'].errors && !loginForm.controls['username'].pristine" class="error-msg">
+                                    Username is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div style="justify-content: space-between;display: flex"><label for="password1">Password</label>
+                                    <a style="cursor:pointer; color:#007bff;" (click)="hide1 = !hide1">{{hide1 ?
+                                        'show' : 'hide'}}</a>
+                                </div>
+                                <input formControlName="password" class="form-control form-control-lg" id="password" placeholder="Enter Password" required [type]="hide1 ? 'password' : 'text'">
+                                <div *ngIf="loginForm.controls['password'].errors && !loginForm.controls['password'].pristine" class="error-msg">
+                                    Password is required.
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 0; font-size: 0.8rem; font-weight: lighter;">
+                                Don't have an account?
+                                <a style="cursor:pointer; color:#007bff;" (click)="changeLogin()"> Sign
+                                    Up</a>
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary pull-xs-right" style="float:right" [disabled]="loginForm.invalid">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a (click)="isLogIn = !isLogIn">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
+                </div> -->
+            </div>
+            <!-- <div class="container" *ngIf="isLogIn == false">
+                <div style="display: flex; justify-content: space-between;margin-top: -66px; text-align: left;">
+                    <h3>Register</h3>
+                    <h3><a (click)="returnHome()" style="cursor: pointer; color: wheat;">Home</a></h3>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 offset-md-2" style=" text-align: left;   margin-top: 25px;">
+                        <form [formGroup]="registerForm" (ngSubmit)="register()">
+                            <div class="form-group">
+                                <div style="    justify-content: space-between;
+                                                                    display: flex">
+                                    <label for="username1">User
+                                        Name</label>
+                                    <a *ngIf="registerForm.controls['username1'].value != ''" style="cursor:pointer; color:#007bff;" (click)="checkUser()">Check
+                                        availability</a>
+                                </div>
+
+                                <input formControlName="username1" type="text" class="form-control form-control-lg" id="username1" placeholder="Enter Username" required>
+                                <div *ngIf="registerForm.controls['username1'].errors && !registerForm.controls['username1'].pristine" class="error-msg">
+                                    Username is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div style="justify-content: space-between; display: flex">
+                                    <label for="password1">Password</label>
+                                    <a style="cursor:pointer; color:#007bff;" (click)="hide = !hide">{{hide ? 'show' :
+                                        'hide'}}</a>
+                                </div>
+
+                                <input formControlName="password1" class="form-control form-control-lg" id="password1" placeholder="Enter Password" required [type]="hide ? 'password' : 'text'">
+
+                                <div *ngIf="registerForm.controls['password1'].errors && !registerForm.controls['password1'].pristine" class="error-msg">
+                                    Password is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div style="    justify-content: space-between;
+                                    display: flex">
+                                    <label for="retypePassword">Retype password</label>
+                                    <a style="cursor:pointer; color:#007bff;" (click)="hide2 = !hide2">{{hide2 ?
+                                        'show' : 'hide'}}</a>
+                                </div>
+                                <input formControlName="retypePassword" class="form-control form-control-lg" id="retypePassword" placeholder="Retype Password" required [type]="hide2 ? 'password' : 'text'">
+                                <div *ngIf="registerForm.controls['retypePassword'].errors && !registerForm.controls['retypePassword'].pristine" class="error-msg">
+                                    Please retype your password
+                                </div>
+                            </div>
+                            <div class="row" style="margin-left: 0; font-size: 0.8rem; font-weight: lighter;">
+                                Already have an account?
+                                <a style="cursor:pointer; color:#007bff;" (click)="changeLogin()"> Sign
+                                    In</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-lg btn-primary pull-xs-right" style="float:right" [disabled]="registerForm.invalid">Submit</button>
+
+                        </form>
+                    </div>
+                </div>
+
+            </div> -->
+        </div>
+    </div>
+    <div class="bg_overlay"></div>
+</div>
